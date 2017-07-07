@@ -1,0 +1,92 @@
+- Load data based on backend api related to route.  
+- Fetch relevant data
+- Forms that include validation
+
+/GET
+
+instant the app loads we want to show list of blog posts so we need to source posts. To store we will use API
+
+//Based on URL show dif set of components. The URL will have a tremendous impact on what the URL is doing. => This is where react router gets involved
+
+React Router
+ npm install --save react-router-dom@4.0.0
+ no longer making server request to get pages instead
+ 	- 	if URL is x show x component
+ 	-	if URL is y show y component
+
+SINGLE PAGE APPLICATION: no longer navigating between distinct HTML documents, always in a single HTML document but showing user different sets of components based on input URL
+
+//ROUTER Config for each screen in application
+
+	All Posts / Root Route
+
+		<Route path="/" component={PostsIndex} />
+
+	Individual Post :id = wildcard
+
+		<Route path="/posts/:id" component={PostsShow} />
+
+	New Post 
+
+		<Route path="/posts/new" component={PostsNew} />
+
+
+//ROUTES for new component
+
+	whenever add new compnentn to app add new route in top level index.js file; 1) import component 2) create route in router config
+
+//REDUX - URL is critical piece of app state. Whenever state changes we re-render app. So how is it any different than a general piece of state?
+
+	Store posts as an object, not an array. Key is the id of the post and the value is the entire post object => make lookup process easier. -> 
+		state.posts[postId]  
+
+
+	{
+		4: {title: 'hello', id: 4},
+		10: {title: 'bye', id: 10}
+	}
+
+	Refactoring it this way means that we no longer need an activePost or selected post
+
+LODASH: First arg is an array, second argument is the property that we want to pull off of each object that we wantt o use as the key of the resulting object
+
+	_.mapKeys(posts, 'id')
+	Result:  makes an object where the key is the id of the post and the object itself is the whole entire post (still w/ the id inside of it)
+
+	state["4"]
+	result: item w/ the id 4
+
+//LIFECYCLE METHODS
+	COMPONENT DID MOUNT: automatically called by react immediately after component shows up in DOM
+
+	- React will always render component one time before the data is fetched.
+//NAVIGATION
+	- //use component by react router to link your nav
+	- link have handlers that prevent normal browser default behavior around anchor tag
+
+	- to="ROUTEHERE"
+
+	<div className="text-xs-right">
+					
+					<Link className="btn btn-primary" to="/posts/new">
+						Add a Post
+					</Link>
+
+				</div>
+//REDUX FORM 
+	- handle forms in redux
+	- saves from wiring up manual action creators
+	- no functionality that we wouldn't otherwise write ourselves
+	
+//PROGRAMATIC NAVIGATION => AUTOMATICALLY DIRECT USER TO POST LIST AFTER SUCCESSFUL POST
+
+
+
+
+
+
+
+
+
+
+
